@@ -13,18 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+# Board
 TARGET_BOARD_PLATFORM := exDroid
 TARGET_BOOTLOADER_BOARD_NAME := crane
-
-USE_CAMERA_STUB := false
-HAVE_HTC_AUDIO_DRIVER := true
-BOARD_USES_GENERIC_AUDIO := true
-BOARD_USES_GPS_TYPE := simulator
 
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
-#CPU stuff
+
+# CPU
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
@@ -37,8 +35,8 @@ TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-BOARD_HAVE_BLUETOOTH := false
 
+# Kernel
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 33554432
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 33554432
@@ -46,19 +44,26 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 568435456
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1073741824
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-#EGL stuff
+TARGET_PREBUILT_KERNEL := device/softwinner/vortexc/prebuilt/ramdisk/kernel
+BOARD_KERNEL_BASE := 0x40000000
+BOARD_KERNEL_CMDLINE := console=ttyS0,115200 rw init=/init loglevel=8
+
+
+# EGL stuff
 BOARD_EGL_CFG := device/softwinner/vortexc/prebuilt/lib/egl/egl.cfg
 USE_OPENGL_RENDERER := true
 BOARD_USE_SKIA_LCDTEXT := true
 ENABLE_WEBGL := true
 
-#Recovery Stuff
+
+# Recovery
 #BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/softwinner/vortexc/recovery_keys.c
 BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 BOARD_UMS_2ND_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun1/file"
 #TARGET_RECOVERY_INITRC := device/softwinner/vortexc/recovery_init.rc
 
-#Misc stuff
+
+# MISC
 TARGET_USE_CUSTOM_LUN_FILE_PATH = "/sys/class/android_usb/android0/f_mass_storage/lun%d/file"
 TARGET_USE_CUSTOM_SECOND_LUN_NUM := 1
 TARGET_RECOVERY_PRE_COMMAND := "echo -n boot-recovery | busybox dd of=/dev/block/nandf count=1 conv=sync; sync"
@@ -68,7 +73,8 @@ TARGET_PROVIDES_INIT_RC := true
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/softwinner/vortexc/releasetools/vortexc_ota_from_target_files
 
-# Wifi stuff
+
+# WIFI
 BOARD_WIFI_VENDOR := realtek
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
@@ -83,15 +89,22 @@ WIFI_DRIVER_MODULE_PATH   := "/system/lib/modules/8192cu.ko"
 
 TARGET_CUSTOM_WIFI := ../../hardware/realtek/wlan/wifi_realtek.c
 
-# Beware: set only prebuilt OR source+config
-TARGET_PREBUILT_KERNEL := device/softwinner/vortexc/prebuilt/ramdisk/kernel
-BOARD_KERNEL_BASE := 0x40000000
-BOARD_KERNEL_CMDLINE := console=ttyS0,115200 rw init=/init loglevel=8
 
+# Audio and Camera
+COMMON_GLOBAL_CFLAGS += "-DICS_CAMERA_BLOB -DICS_AUDIO_BLOB"
+USE_CAMERA_STUB := false
+HAVE_HTC_AUDIO_DRIVER := true
+BOARD_USES_GENERIC_AUDIO := true
+
+
+# GPS and Bluetooth
+BOARD_USES_GPS_TYPE := simulator
+BOARD_HAVE_BLUETOOTH := false
+
+
+# G-Sensor
 SW_BOARD_USES_GSENSOR_TYPE := mxc622x
 SW_BOARD_GSENSOR_DIRECT_X := true
 SW_BOARD_GSENSOR_DIRECT_Y := false
 SW_BOARD_GSENSOR_DIRECT_Z := false
 SW_BOARD_GSENSOR_XY_REVERT := true
-
-COMMON_GLOBAL_CFLAGS += "-DICS_CAMERA_BLOB -DICS_AUDIO_BLOB"

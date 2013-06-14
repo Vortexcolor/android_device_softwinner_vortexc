@@ -25,7 +25,7 @@ $(call inherit-product-if-exists, vendor/softwinner/vortexc/vortexc-vendor.mk)
 PRODUCT_NAME := full_vortexc
 PRODUCT_DEVICE := vortexc
 PRODUCT_BRAND := Allwinner
-PRODUCT_MODEL := MPvortexcC
+PRODUCT_MODEL := vortexc
 PRODUCT_MANUFACTURER := Allwinner
 
 # MDPI / HDPI images
