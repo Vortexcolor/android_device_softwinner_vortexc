@@ -1,0 +1,57 @@
+import init.sun5i.usb.rc
+
+on early-init
+	export EXTERNAL_STORAGE /storage/sdcard0
+        export SECONDARY_STORAGE /storage/sdcard1
+        mkdir /storage 0050 system sdcard_r
+        mkdir /storage/sdcard0 0000 system system
+        mkdir /storage/sdcard1 0000 system system
+        mkdir /storage/sdcard2 0000 system system
+        symlink /storage/sdcard0 /sdcard
+        symlink /storage/sdcard0 /mnt/sdcard		
+
+	mkdir /databk 0700 root  system
+
+on fs
+	exec /system/bin/e2fsck -y /dev/block/data
+        exec /system/bin/e2fsck -y /dev/block/cache
+        mount ext4 /dev/block/nandd /system wait ro noatime nodev barrier=0 nobh
+        mount ext4 /dev/block/nande /data wait noatime nodev barrier=0 nobh data=writeback noauto_da_alloc commit=30
+        mount ext4 /dev/block/nandh /cache wait noatime nodev barrier=0 nobh data=writeback noauto_da_alloc commit=30
+
+on boot
+
+#insmod key & tp driver
+	insmod /system/lib/modules/ft5x_ts.ko
+
+#insmod mali driver
+	insmod /system/lib/modules/ump.ko
+	insmod /system/lib/modules/mali.ko
+
+#insmod video driver
+	insmod /system/lib/modules/cedarx.ko
+	exec /system/bin/sh /system/bin/setupsensors.sh
+
+#csi module
+	insmod /system/lib/modules/videobuf-core.ko
+	insmod /system/lib/modules/videobuf-dma-contig.ko
+	insmod /system/lib/modules/gc0308.ko
+	insmod /system/lib/modules/sun5i_csi0.ko
+
+#network module
+	insmod /system/lib/modules/asix.ko bsize=0
+	insmod /system/lib/modules/qf9700.ko
+	insmod /system/lib/modules/mcs7830.ko
+	insmod /system/lib/modules/8192cu.ko
+
+#sensor module
+	insmod /system/lib/modules/mecs.ko
+
+# WEXT: only support sta
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 \
+	-c/data/misc/wifi/wpa_supplicant.conf -e/data/misc/wifi/entropy.bin
+	class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    group system wifi inet
+    disabled
+    oneshot
