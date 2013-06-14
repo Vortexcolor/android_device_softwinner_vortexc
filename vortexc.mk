@@ -64,6 +64,8 @@ PRODUCT_PACKAGES += \
 	hwcomposer.exDroid \
 	lights.sun5i \
 	display.sun5i \
+	sensors.exDroid \
+	camera.exDroid \
         libcedarxbase \
         libcedarxosal \
 	libcedarv \
@@ -95,3 +97,6 @@ PRODUCT_PACKAGES += \
 # CM9 apps
 PRODUCT_PACKAGES += \
 	com.android.future.usb.accessory
+
+# Google Apps
+$(call inherit-product, vendor/google/essencial.mk ) 
