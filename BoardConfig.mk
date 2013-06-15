@@ -92,7 +92,7 @@ TARGET_CUSTOM_WIFI := ../../hardware/realtek/wlan/wifi_realtek.c
 
 # Audio and Camera
 COMMON_GLOBAL_CFLAGS += "-DICS_CAMERA_BLOB -DICS_AUDIO_BLOB"
-USE_CAMERA_STUB := false
+USE_CAMERA_STUB := true
 HAVE_HTC_AUDIO_DRIVER := true
 BOARD_USES_GENERIC_AUDIO := true
 
