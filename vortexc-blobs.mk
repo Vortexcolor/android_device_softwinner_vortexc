@@ -60,7 +60,7 @@ PRODUCT_COPY_FILES += \
 # /system/usr
 PRODUCT_COPY_FILES += \
 	device/softwinner/vortexc/prebuilt/usr/keylayout/axp20-supplyer.kl:system/usr/keylayout/axp20-supplyer.kl \
-	device/softwinner/vortexc/prebuilt/usr/sw-keyboard.kl:system/usr/keylayout/sw-keyboard.kl \
+	device/softwinner/vortexc/prebuilt/usr/keylayout/sw-keyboard.kl:system/usr/keylayout/sw-keyboard.kl \
 	device/softwinner/vortexc/prebuilt/usr/icu/icudt46l.dat:system/usr/icu/icudt46l.dat
 
 PRODUCT_COPY_FILES += \
