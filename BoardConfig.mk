@@ -77,17 +77,17 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/softwinner/vortexc/releaseto
 # WIFI
 BOARD_WIFI_VENDOR := realtek
 WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_rtl
-BOARD_HOSTAPD_DRIVER        := WEXT
+BOARD_HOSTAPD_DRIVER        := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_rtl
-BOARD_WLAN_DEVICE := rtl8188eu
-SW_BOARD_USR_WIFI := rtl8188eu
+BOARD_WLAN_DEVICE := rtl8192cu
+SW_BOARD_USR_WIFI := rtl8192cu
 
-WIFI_DRIVER_MODULE_NAME   := 8188eu
-WIFI_DRIVER_MODULE_PATH   := "/system/lib/modules/8188eu.ko"
+WIFI_DRIVER_MODULE_NAME   := 8192cu
+WIFI_DRIVER_MODULE_PATH   := "/system/lib/modules/8192cu.ko"
 
-TARGET_CUSTOM_WIFI := ../../hardware/realtek/wlan/wifi_realtek.c
+TARGET_CUSTOM_WIFI := libraries/realtek/wlan/wifi_realtek.c
 
 
 # Audio and Camera
