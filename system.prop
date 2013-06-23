@@ -20,7 +20,6 @@ wifi.supplicant_scan_interval = 150
 persist.sys.use_dithering=0
 
 # Dalvik
-dalvik.vm.heapsize=48m
 dalvik.vm.verify-bytecode=false
 dalvik.vm.dexopt-flags=v=n,o=v
 dalvik.vm.execution-mode=int:jit
@@ -40,10 +39,11 @@ ro.com.google.locationfeatures=1
 
 # Deep sleep
 pm.sleep_mode=1
+ro.ril.disable.power.collapse=1
 
 # Other build.prop tweaks
 ro.vold.umsdirtyratio=20
-persist.sys.purgeable_assets=0
+persist.sys.purgeable_assets=1
 windowsmgr.max_events_per_sec=240
 view.touch_slop=2
 view.minimum_fling_velocity=25
